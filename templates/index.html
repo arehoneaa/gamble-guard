@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gambling Site Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>National Gambling Board of South Africa</h1>
+        </header>
+        <div class="content">
+            <h2>Check if a Gambling Site is Verified</h2>
+            <form id="checkForm">
+                <label for="url">Enter Gambling Site URL:</label>
+                <input type="text" id="url" name="url" placeholder="https://example.com" required>
+                <button type="submit">Check</button>
+            </form>
+            <div id="result">
+                <h3>Site Analysis Results:</h3>
+                <p class="site-status"></p>
+                <p class="site-name"></p>
+                <p class="site-license"></p>
+                <p class="site-expiry"></p>
+                <p class="site-country"></p>
+                <p class="site-trust"></p>
+            </div>
+
+            <section class="recommended-sites">
+                <h2>Recommended Verified Gambling Sites</h2>
+                <ul>
+                    {% for site in recommended_sites %}
+                        <li><a href="{{ site[1] }}" target="_blank">{{ site[0] }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="info-section">
+                <h2>Understanding Verified and Unverified Gambling Sites</h2>
+                <p>
+                    Verified gambling sites in South Africa comply with local regulations, are licensed by the National Gambling Board, and offer protection to consumers. These sites are regularly monitored to ensure fairness, security, and responsible gambling practices.
+                </p>
+                <p>
+                    Unverified gambling sites may not comply with South African laws and could pose risks such as fraud, unfair gaming practices, and the potential for consumer exploitation. These sites do not contribute to tax revenues or support public services like verified platforms do.
+                </p>
+                <p>
+                    Please ensure you use only verified gambling platforms for your safety and protection. For more information, visit the <a href="https://www.ngb.org.za" target="_blank">National Gambling Board website</a>.
+                </p>
+            </section>
+
+            <!-- Add Terms and Conditions Section -->
+            <section class="tos-section">
+                <h2>Terms of Service</h2>
+                <p>
+                    The information provided by this website is for informational purposes only. We make no guarantees regarding the accuracy, reliability, or completeness of the information. Users should verify the legality and reliability of any gambling site they visit. By using this website, you agree to hold us harmless from any liability, legal claims, or damages resulting from your use of any gambling website. The use of any gambling site is at your own risk.
+                </p>
+                <p>
+                    We do not endorse or promote any specific gambling platforms. Always gamble responsibly, and seek professional advice if you experience gambling-related issues.
+                </p>
+            </section>
+
+        </div>
+        <footer>
+            <p>&copy; 2024 National Gambling Board of South Africa</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('checkForm');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+
+            // Make an API request to the backend to check verification status
+            const response = await fetch('/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+
+            const result = await response.json();
+            const resultDiv = document.getElementById('result');
+            const statusEl = document.querySelector('.site-status');
+            const nameEl = document.querySelector('.site-name');
+            const licenseEl = document.querySelector('.site-license');
+            const expiryEl = document.querySelector('.site-expiry');
+            const countryEl = document.querySelector('.site-country');
+            const trustEl = document.querySelector('.site-trust');
+
+            if (result.verified) {
+                statusEl.innerHTML = `<strong>Status:</strong> <span class="verified">VERIFIED</span>`;
+                nameEl.innerHTML = `<strong>Name:</strong> ${result.name}`;
+                licenseEl.innerHTML = `<strong>License:</strong> ${result.license}`;
+                expiryEl.innerHTML = `<strong>License Expiry:</strong> ${result.license_expiry}`;
+                countryEl.innerHTML = `<strong>Country of Origin:</strong> ${result.country_of_origin}`;
+                trustEl.innerHTML = `<strong>Trustworthiness Score:</strong> ${result.trustworthiness_score}%`;
+            } else {
+                statusEl.innerHTML = `<strong>Status:</strong> <span class="unverified">UNVERIFIED</span>`;
+                countryEl.innerHTML = `<strong>Country of Origin:</strong> ${result.country_of_origin}`;
+                trustEl.innerHTML = `<strong>Trustworthiness Score:</strong> ${result.trustworthiness_score}%`;
+            }
+
+            resultDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

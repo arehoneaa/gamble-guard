@@ -1,0 +1,148 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 800px;
+    text-align: center;
+}
+
+header {
+    background-color: #ff4500; /* National Orange */
+    padding: 20px;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.content h2 {
+    color: #ff4500; /* Orange */
+    margin: 20px 0;
+    font-size: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #d32f2f; /* National Red */
+    font-size: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+}
+
+button {
+    padding: 15px 25px;
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+#result {
+    margin-top: 30px;
+    display: none;
+}
+
+#result h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.verified {
+    color: #28a745; /* Green for verified */
+    font-weight: bold;
+}
+
+.unverified {
+    color: #d32f2f; /* Red for unverified */
+    font-weight: bold;
+}
+
+/* Recommended Sites Styling */
+.recommended-sites ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.recommended-sites li {
+    margin-bottom: 10px;
+}
+
+.recommended-sites a {
+    color: #ff4500; /* Orange for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.recommended-sites a:hover {
+    text-decoration: underline;
+    color: #d32f2f; /* Darker red on hover */
+}
+
+/* Info Section Styling */
+.info-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #ff4500;
+}
+
+.info-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Terms of Service Styling */
+.tos-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ff4500;
+}
+
+.tos-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #888;
+}
